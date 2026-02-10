@@ -26,6 +26,45 @@ public class ProductRepository {
         }
     }
 
+    public Product update(Product product) {
+        try {
+            for (int i = 0; i < productData.size(); i++) {
+                if (productData.get(i).getProductId().equals(product.getProductId())) {
+                    productData.set(i, product);
+                    return product;
+                }
+            }
+            // Jika loop selesai tanpa return, berarti ID tidak ditemukan
+            throw new IllegalArgumentException("Product with ID " + product.getProductId() + " not found");
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public void delete(String id) {
+        try {
+            boolean removed = productData.removeIf(product -> product.getProductId().equals(id));
+            if (!removed) {
+                throw new IllegalArgumentException("Product with ID " + id + " not found for deletion");
+            }
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    public Product findById(String id) {
+        try {
+            for (Product product : productData) {
+                if (product.getProductId().equals(id)) {
+                    return product;
+                }
+            }
+            throw new IllegalArgumentException("Product not found");
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
