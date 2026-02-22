@@ -11,13 +11,22 @@ jobs:
     steps:
       - name: Check out the git repository
         uses: actions/checkout@v4
+
       - name: Set up Java toolchain
         uses: actions/setup-java@v4
         with:
           distribution: "temurin"
           java-version: "21"
           cache: "gradle"
+
       - name: Make gradlew executable
         run: chmod +x gradlew
+
       - name: Run unit tests
         run: ./gradlew test
+
+      - name: SonarCloud analyze
+        run: ./gradlew sonar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

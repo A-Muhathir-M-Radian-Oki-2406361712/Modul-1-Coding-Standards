@@ -3,6 +3,7 @@ plugins {
     jacoco
     id("org.springframework.boot") version "3.5.10"
     id("io.spring.dependency-management") version "1.1.7"
+    id("org.sonarqube") version "7.0.1.6134"
 }
 
 group = "id.ac.ui.cs.advprog"
@@ -46,6 +47,7 @@ dependencies {
 }
 
 tasks.test {
+    useJUnitPlatform()
     filter {
         excludeTestsMatching("*FunctionalTest")
     }
@@ -54,6 +56,19 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "A-Muhathir-M-Radian-Oki-2406361712_Modul-1-Coding-Standards")
+        property("sonar.organization", "a-muhathir-m-radian-oki-2406361712")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+    }
 }
 
 tasks.register<Test>("unitTest") {
@@ -64,6 +79,7 @@ tasks.register<Test>("unitTest") {
         excludeTestsMatching("*FunctionalTest")
     }
 }
+
 
 tasks.register<Test>("functionalTest") {
     description = "Runs functional tests."
