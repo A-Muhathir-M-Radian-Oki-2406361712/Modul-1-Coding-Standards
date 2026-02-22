@@ -7,7 +7,7 @@ on:
 jobs:
   test:
     name: Run tests
-    runs-on: ubuntu-24.04 [Beta]
+    runs-on: ubuntu-22.04
     steps:
       - name: Check out the git repository
         uses: actions/checkout@v4
