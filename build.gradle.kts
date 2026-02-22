@@ -65,9 +65,8 @@ tasks.jacocoTestReport {
 
 sonar {
     properties {
-        property("sonar.projectKey", System.getenv("SONAR_PROJECT_KEY"))
-        property("sonar.organization", System.getenv("SONAR_ORGANIZATION"))
-        property("sonar.host.url", "https://sonarcloud.io")
+        property("sonar.projectKey", "A-Muhathir-M-Radian-Oki-2406361712_Modul-1-Coding-Standards")
+        property("sonar.organization", "a-muhathir-m-radian-oki-2406361712")
         property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
