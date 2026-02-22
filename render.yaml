@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: eshop
+    runtime: java
+    plan: free
+    branch: main
+    buildCommand: ./gradlew clean bootJar
+    startCommand: java -Dserver.port=$PORT -jar build/libs/*.jar
+    healthCheckPath: /
+    envVars:
+      - key: JAVA_VERSION
+        value: 21
