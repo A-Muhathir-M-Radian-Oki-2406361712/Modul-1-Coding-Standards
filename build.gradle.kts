@@ -46,6 +46,7 @@ dependencies {
 }
 
 tasks.test {
+    useJUnitPlatform()
     filter {
         excludeTestsMatching("*FunctionalTest")
     }
@@ -54,6 +55,11 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test)
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+        csv.required.set(false)
+    }
 }
 
 tasks.register<Test>("unitTest") {
@@ -64,6 +70,7 @@ tasks.register<Test>("unitTest") {
         excludeTestsMatching("*FunctionalTest")
     }
 }
+
 
 tasks.register<Test>("functionalTest") {
     description = "Runs functional tests."
