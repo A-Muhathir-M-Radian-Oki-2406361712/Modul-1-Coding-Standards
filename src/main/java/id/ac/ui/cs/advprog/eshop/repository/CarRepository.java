@@ -12,7 +12,7 @@ public class CarRepository {
 
     private List<Car> carData = new ArrayList<>();
 
-    public Car createCar(Car car) {
+    public Car create(Car car) {
         if (car.getCarId() == null) {
             UUID uuid = UUID.randomUUID();
             car.setCarId(uuid.toString());
@@ -34,13 +34,12 @@ public class CarRepository {
         return null;
     }
 
-    public Car update(Car car) {
-        for (Car car1 : carData) {
-            if (car1.getCarId().equals(car.getCarId())) {
-                car1.setCarId(car.getCarId());
-                car1.setCarName(car.getCarName());
-                car1.setCarColor(car.getCarColor());
-                car.setCarQuantity(car.getCarQuantity());
+    public Car update(String id, Car updatedCar) {
+        for (Car car : carData) {
+            if (car.getCarId().equals(id)) {
+                car.setCarName(updatedCar.getCarName());
+                car.setCarColor(updatedCar.getCarColor());
+                car.setCarQuantity(updatedCar.getCarQuantity());
                 return car;
             }
         }
